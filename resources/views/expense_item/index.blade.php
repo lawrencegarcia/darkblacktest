@@ -12,17 +12,11 @@ session_start();
 if (isset($_GET['expense_id']))
 {
     $expense_id = $_GET['expense_id'];
-    echo '<script type="text/javascript">
-            let storedExpenseID = "' .  $expense_id . '";
-            sessionStorage.setItem(variableName, storedExpenseId);
-        </script>';
-    
-    
+    $_SESSION['expense_id'] = $expense_id;
 }
 else
 {
-    echo 'Something messed up yo';
-    echo $expense_id = '<script> document.write(storedExpenseID); </script>';
+    $expense_id = $_SESSION['expense_id'];
 }
 ?>
 
@@ -30,20 +24,14 @@ else
 @section('content')
 
 <script type="text/javascript">
-            //document.write(storedExpenseID)
-            //document.getElementById("expenseid").value = storedExpenseID;
-            sessionStorage.getItem(variableName);
+            localStorage.getItem(variableName);
 </script>
     
     <a href="{{ url('/expense') }}" class="btn btn-primary">Back to Expenses</a>
     <table class="table table-bordered table-responsive" style="margin-top: 10px;">
         <thead>
             <tr>
-                <th>ID 
-                    <?php
-                    echo '<script> document.write(variableName); </script>';
-                    ?>
-                
+                <th>ID    
                 </th>
                 <th>expense_id</th>
                 <th>description</th>
