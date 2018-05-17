@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\expense_item;
+use App\expense;
 
 class ExpenseItemController extends Controller
 {
