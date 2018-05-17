@@ -40,7 +40,8 @@ session_start();
                         $total = 0; 
                         $totalgst = 0;
                         $totalpst = 0;
-                        $expense_items = DB::table('expense_items')->get();
+                        $expense_items = DB::table('expense_items')
+                        ->where('expense_id', '=', $_SESSION['expense_id'])->orderBy('updated_at','DESC')->get();
                         foreach ($expense_items as $expense_item){
                             $description = $expense_item->description;
                             $category = $expense_item->category;
@@ -65,8 +66,7 @@ session_start();
                 <?php } ?> 
                 </td>
                 <td>
-                    <b><?php echo $total;
-                        echo session_id();?></b>
+                    <b><?php echo $total;?></b>
                     <br>
                     <?php 
                      foreach ($expense_items as $expense_item){    
@@ -110,7 +110,7 @@ session_start();
                 
                     <form method="get" action="/expenseitem">
                     <input type="hidden" name="expense_id" value="<?php echo $_SESSION['expense_id'];?>">
-                    <input type="submit">
+                    <input type="submit" class="btn btn-success" value="Manage Items">
                     </form>
             </tr>
       @endforeach
