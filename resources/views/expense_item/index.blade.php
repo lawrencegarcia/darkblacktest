@@ -13,7 +13,8 @@ if (isset($_GET['expense_id']))
 {
     $expense_id = $_GET['expense_id'];
     echo '<script type="text/javascript">
-            var storedExpenseID = "' .  $expense_id . '";
+            let storedExpenseID = "' .  $expense_id . '";
+            sessionStorage.setItem(variableName, storedExpenseId);
         </script>';
     
     
@@ -21,7 +22,7 @@ if (isset($_GET['expense_id']))
 else
 {
     echo 'Something messed up yo';
-    //echo $expense_id = '<script>document.write(storedExpenseID);</script>';
+    echo $expense_id = '<script> document.write(storedExpenseID); </script>';
 }
 ?>
 
@@ -29,8 +30,9 @@ else
 @section('content')
 
 <script type="text/javascript">
-            document.write(storedExpenseID)
-            document.getElementById("expenseid").value = storedExpenseID;
+            //document.write(storedExpenseID)
+            //document.getElementById("expenseid").value = storedExpenseID;
+            sessionStorage.getItem(variableName);
 </script>
     
     <a href="{{ url('/expense') }}" class="btn btn-primary">Back to Expenses</a>
@@ -39,8 +41,7 @@ else
             <tr>
                 <th>ID 
                     <?php
-                    echo'<script> document.write(storedExpenseID); </script>';
-
+                    echo '<script> document.write(variableName); </script>';
                     ?>
                 
                 </th>
@@ -53,7 +54,9 @@ else
                 <th>created at</th>
                 <th>updated at</th>
                 <th colspan="3"><form method="get" action="/expenseitem/create">
-                    <input type="hidden" name="expenseid" value="<?php echo'<script> document.write(storedExpenseID); </script>';?>">
+                    <input type="hidden"  name = "expense_id" value='<?php
+                    echo $expense_id;
+                    ?>'>
                     <input type="submit" value="Add Item">
                     </form></th>
                 
